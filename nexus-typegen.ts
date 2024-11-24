@@ -43,12 +43,57 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Account: { // root type
+    access_token?: string | null; // String
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    expires_at?: number | null; // Int
+    id_token?: string | null; // String
+    provider: string; // String!
+    providerAccountId: string; // String!
+    refresh_token?: string | null; // String
+    scope?: string | null; // String
+    session_state?: string | null; // String
+    token_type?: string | null; // String
+    type: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    userId: string; // String!
+  }
+  Authenticator: { // root type
+    counter: number; // Int!
+    credentialBackedUp: boolean; // Boolean!
+    credentialDeviceType: string; // String!
+    credentialID: string; // String!
+    credentialPublicKey: string; // String!
+    providerAccountId: string; // String!
+    transports?: string | null; // String
+    userId: string; // String!
+  }
   Mutation: {};
   Query: {};
-  User: { // root type
-    email?: string | null; // String
-    id: string; // ID!
+  Session: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    expires: NexusGenScalars['DateTime']; // DateTime!
+    sessionToken: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    userId: string; // String!
+  }
+  Sportsbook: { // root type
+    clone?: NexusGenRootTypes['Sportsbook'] | null; // Sportsbook
+    country?: string | null; // String
+    fantasy?: boolean | null; // Boolean
+    id?: string | null; // String
     name?: string | null; // String
+    sgp?: boolean | null; // Boolean
+    state?: string | null; // String
+  }
+  User: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    email: string; // String!
+    emailVerified?: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string; // ID!
+    image?: string | null; // String
+    name?: string | null; // String
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   UserStats: { // root type
     correctPredictions: number; // Int!
@@ -60,6 +105,11 @@ export interface NexusGenObjects {
     totalPredictions: number; // Int!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
+  }
+  VerificationToken: { // root type
+    expires: NexusGenScalars['DateTime']; // DateTime!
+    identifier: string; // String!
+    token: string; // String!
   }
 }
 
@@ -74,19 +124,72 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Account: { // field return type
+    access_token: string | null; // String
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    expires_at: number | null; // Int
+    id_token: string | null; // String
+    provider: string; // String!
+    providerAccountId: string; // String!
+    refresh_token: string | null; // String
+    scope: string | null; // String
+    session_state: string | null; // String
+    token_type: string | null; // String
+    type: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+  }
+  Authenticator: { // field return type
+    counter: number; // Int!
+    credentialBackedUp: boolean; // Boolean!
+    credentialDeviceType: string; // String!
+    credentialID: string; // String!
+    credentialPublicKey: string; // String!
+    providerAccountId: string; // String!
+    transports: string | null; // String
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+  }
   Mutation: { // field return type
     createUser: NexusGenRootTypes['User'] | null; // User
     createUserStats: NexusGenRootTypes['UserStats'] | null; // UserStats
     updateUserStats: NexusGenRootTypes['UserStats'] | null; // UserStats
   }
   Query: { // field return type
+    sportsbooks: Array<NexusGenRootTypes['Sportsbook'] | null> | null; // [Sportsbook]
     userById: NexusGenRootTypes['User'] | null; // User
     userStatsByUserId: NexusGenRootTypes['UserStats'] | null; // UserStats
   }
-  User: { // field return type
-    email: string | null; // String
-    id: string; // ID!
+  Session: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    expires: NexusGenScalars['DateTime']; // DateTime!
+    sessionToken: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+  }
+  Sportsbook: { // field return type
+    clone: NexusGenRootTypes['Sportsbook'] | null; // Sportsbook
+    country: string | null; // String
+    fantasy: boolean | null; // Boolean
+    id: string | null; // String
     name: string | null; // String
+    sgp: boolean | null; // Boolean
+    state: string | null; // String
+  }
+  User: { // field return type
+    Authenticator: NexusGenRootTypes['Authenticator'][]; // [Authenticator!]!
+    UserStats: NexusGenRootTypes['UserStats'] | null; // UserStats
+    accounts: NexusGenRootTypes['Account'][]; // [Account!]!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    email: string; // String!
+    emailVerified: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string; // ID!
+    image: string | null; // String
+    name: string | null; // String
+    sessions: NexusGenRootTypes['Session'][]; // [Session!]!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   UserStats: { // field return type
     correctPredictions: number; // Int!
@@ -100,22 +203,80 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
   }
+  VerificationToken: { // field return type
+    expires: NexusGenScalars['DateTime']; // DateTime!
+    identifier: string; // String!
+    token: string; // String!
+  }
 }
 
 export interface NexusGenFieldTypeNames {
+  Account: { // field return type name
+    access_token: 'String'
+    createdAt: 'DateTime'
+    expires_at: 'Int'
+    id_token: 'String'
+    provider: 'String'
+    providerAccountId: 'String'
+    refresh_token: 'String'
+    scope: 'String'
+    session_state: 'String'
+    token_type: 'String'
+    type: 'String'
+    updatedAt: 'DateTime'
+    user: 'User'
+    userId: 'String'
+  }
+  Authenticator: { // field return type name
+    counter: 'Int'
+    credentialBackedUp: 'Boolean'
+    credentialDeviceType: 'String'
+    credentialID: 'String'
+    credentialPublicKey: 'String'
+    providerAccountId: 'String'
+    transports: 'String'
+    user: 'User'
+    userId: 'String'
+  }
   Mutation: { // field return type name
     createUser: 'User'
     createUserStats: 'UserStats'
     updateUserStats: 'UserStats'
   }
   Query: { // field return type name
+    sportsbooks: 'Sportsbook'
     userById: 'User'
     userStatsByUserId: 'UserStats'
   }
-  User: { // field return type name
-    email: 'String'
-    id: 'ID'
+  Session: { // field return type name
+    createdAt: 'DateTime'
+    expires: 'DateTime'
+    sessionToken: 'String'
+    updatedAt: 'DateTime'
+    user: 'User'
+    userId: 'String'
+  }
+  Sportsbook: { // field return type name
+    clone: 'Sportsbook'
+    country: 'String'
+    fantasy: 'Boolean'
+    id: 'String'
     name: 'String'
+    sgp: 'Boolean'
+    state: 'String'
+  }
+  User: { // field return type name
+    Authenticator: 'Authenticator'
+    UserStats: 'UserStats'
+    accounts: 'Account'
+    createdAt: 'DateTime'
+    email: 'String'
+    emailVerified: 'DateTime'
+    id: 'ID'
+    image: 'String'
+    name: 'String'
+    sessions: 'Session'
+    updatedAt: 'DateTime'
   }
   UserStats: { // field return type name
     correctPredictions: 'Int'
@@ -128,6 +289,11 @@ export interface NexusGenFieldTypeNames {
     updatedAt: 'DateTime'
     user: 'User'
     userId: 'String'
+  }
+  VerificationToken: { // field return type name
+    expires: 'DateTime'
+    identifier: 'String'
+    token: 'String'
   }
 }
 
