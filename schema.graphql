@@ -36,13 +36,55 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
+type Game {
+  id: String
+  league: String
+  live: Boolean
+  sport: String
+  sportsbooks: [OddsSportsbook]
+  start: String
+  status: String
+  teams: Teams
+  tournament: String
+}
+
 type Mutation {
   createUser(email: String, name: String): User
   createUserStats(correctPredictions: Int, currentStreak: Int, longestStreak: Int, points: Int, totalPredictions: Int, userId: String): UserStats
   updateUserStats(correctPredictions: Int, currentStreak: Int, longestStreak: Int, points: Int, totalPredictions: Int, userId: String): UserStats
 }
 
+type Odd {
+  grade: String
+  group: String
+  id: String
+  link: String
+  main: Boolean
+  market: String
+  name: String
+  players: [Player]
+  points: Float
+  price: String
+  selection: String
+  sgp: String
+  updated: String
+}
+
+type OddsSportsbook {
+  id: String
+  name: String
+  odds: [Odd]
+}
+
+type Player {
+  id: String
+  name: String
+  position: String
+  team: Team
+}
+
 type Query {
+  games(leagueId: String!, sportsbookId: String!): [Game]
   sportsbooks: [Sportsbook]
   userById(id: String): User
   userStatsByUserId(userId: String): UserStats
@@ -65,6 +107,17 @@ type Sportsbook {
   name: String
   sgp: Boolean
   state: String
+}
+
+type Team {
+  abbreviation: String
+  id: String
+  name: String
+}
+
+type Teams {
+  away: Team
+  home: Team
 }
 
 type User {

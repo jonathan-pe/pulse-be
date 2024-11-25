@@ -14,3 +14,17 @@ export async function getSportsbooks(): Promise<Sportsbook[]> {
 
   return sportsbooks
 }
+
+export const getGames = async (leagueId: string, sportsbookId: string) => {
+  const response = await fetch(`${ODDSBLAZE_API_URL}/odds/${sportsbookId}_${leagueId}.json?key=${ODDSBLAZE_API_KEY}`)
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch games: ${response.statusText}`)
+  }
+
+  const { games } = await response.json()
+
+  console.log(games)
+
+  return games
+}
