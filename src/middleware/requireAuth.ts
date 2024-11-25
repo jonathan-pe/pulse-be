@@ -15,7 +15,6 @@ const prisma = new PrismaClient()
 const _decryptJWE = async (token: string) => {
   const { plaintext } = await compactDecrypt(token!, ENCRYPTION_KEY)
   const decodedJWT = await jwtVerify(new TextDecoder().decode(plaintext), SECRET_KEY, { algorithms: ['HS512'] })
-  console.log('decoded', decodedJWT.payload)
   return decodedJWT.payload
 }
 
@@ -35,8 +34,6 @@ export const requireAuth = async (ctx: YogaInitialContext) => {
     }
 
     const user = await prisma.user.findUnique({ where: { id: sub } })
-
-    console.log(user)
 
     if (!user) {
       throw new Error('You must be logged in to perform this action')
