@@ -84,7 +84,7 @@ type Player {
 }
 
 type Query {
-  games(leagueId: String!, sportsbookId: String!): [Game]
+  games(gameId: String, leagueId: String!, sportsbookId: String!): [Game]
   sportsbooks: [Sportsbook]
   userById(id: String): User
   userStatsByUserId(userId: String): UserStats

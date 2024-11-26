@@ -88,10 +88,11 @@ export const GamesQuery = queryField('games', {
   args: {
     leagueId: nonNull('String'),
     sportsbookId: nonNull('String'),
+    gameId: 'String',
   },
-  resolve: async (_root, { leagueId, sportsbookId }, ctx: YogaInitialContext) => {
+  resolve: async (_root, { leagueId, sportsbookId, gameId }, ctx: YogaInitialContext) => {
     await requireAuth(ctx)
 
-    return getGames(leagueId, sportsbookId)
+    return getGames(leagueId, sportsbookId, gameId)
   },
 })

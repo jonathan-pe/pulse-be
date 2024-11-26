@@ -462,6 +462,7 @@ export interface NexusGenArgTypes {
   }
   Query: {
     games: { // args
+      gameId?: string | null; // String
       leagueId: string; // String!
       sportsbookId: string; // String!
     }
