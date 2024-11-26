@@ -28,7 +28,5 @@ export const getGames = async (leagueId: string, sportsbookId: string, gameId?: 
 
   const { games } = await response.json()
 
-  console.log(games)
-
   return games
 }
