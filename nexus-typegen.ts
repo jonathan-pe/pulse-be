@@ -241,8 +241,8 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     games: Array<NexusGenRootTypes['Game'] | null> | null; // [Game]
+    self: NexusGenRootTypes['User'] | null; // User
     sportsbooks: Array<NexusGenRootTypes['Sportsbook'] | null> | null; // [Sportsbook]
-    userById: NexusGenRootTypes['User'] | null; // User
     userStatsByUserId: NexusGenRootTypes['UserStats'] | null; // UserStats
   }
   Session: { // field return type
@@ -375,8 +375,8 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     games: 'Game'
+    self: 'User'
     sportsbooks: 'Sportsbook'
-    userById: 'User'
     userStatsByUserId: 'UserStats'
   }
   Session: { // field return type name
@@ -443,14 +443,6 @@ export interface NexusGenArgTypes {
       email?: string | null; // String
       name?: string | null; // String
     }
-    createUserStats: { // args
-      correctPredictions?: number | null; // Int
-      currentStreak?: number | null; // Int
-      longestStreak?: number | null; // Int
-      points?: number | null; // Int
-      totalPredictions?: number | null; // Int
-      userId?: string | null; // String
-    }
     updateUserStats: { // args
       correctPredictions?: number | null; // Int
       currentStreak?: number | null; // Int
@@ -465,9 +457,6 @@ export interface NexusGenArgTypes {
       gameId?: string | null; // String
       leagueId: string; // String!
       sportsbookId: string; // String!
-    }
-    userById: { // args
-      id?: string | null; // String
     }
     userStatsByUserId: { // args
       userId?: string | null; // String

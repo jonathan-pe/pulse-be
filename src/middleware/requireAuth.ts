@@ -38,6 +38,8 @@ export const requireAuth = async (ctx: YogaInitialContext) => {
     if (!user) {
       throw new Error('You must be logged in to perform this action')
     }
+
+    return user
   } catch (error) {
     console.error(error)
     throw new Error('You must be logged in to perform this action')

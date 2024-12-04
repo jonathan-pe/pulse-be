@@ -1,5 +1,6 @@
 import { objectType, mutationField, queryField } from 'nexus'
 import { Account, Authenticator, Session, User, VerificationToken } from 'nexus-prisma'
+import { requireAuth } from '../middleware/requireAuth'
 
 // User Type
 export const UserSchema = objectType({
@@ -85,12 +86,15 @@ export const AuthenticatorSchema = objectType({
 })
 
 // Query Type
-export const UserByIdQuery = queryField('userById', {
+export const UserByIdQuery = queryField('self', {
   type: 'User',
-  args: {
-    id: 'String',
+  resolve: async (_parent, _args, ctx) => {
+    const { id } = await requireAuth(ctx)
+
+    const { prisma } = ctx
+
+    return prisma.user.findUnique({ where: { id } })
   },
-  resolve: (_, { id }, { prisma }) => prisma.user.findUnique({ where: { id } }),
 })
 
 // Mutation Type

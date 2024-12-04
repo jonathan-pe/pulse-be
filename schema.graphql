@@ -50,7 +50,7 @@ type Game {
 
 type Mutation {
   createUser(email: String, name: String): User
-  createUserStats(correctPredictions: Int, currentStreak: Int, longestStreak: Int, points: Int, totalPredictions: Int, userId: String): UserStats
+  createUserStats: UserStats
   updateUserStats(correctPredictions: Int, currentStreak: Int, longestStreak: Int, points: Int, totalPredictions: Int, userId: String): UserStats
 }
 
@@ -85,8 +85,8 @@ type Player {
 
 type Query {
   games(gameId: String, leagueId: String!, sportsbookId: String!): [Game]
+  self: User
   sportsbooks: [Sportsbook]
-  userById(id: String): User
   userStatsByUserId(userId: String): UserStats
 }
 
