@@ -2,136 +2,25 @@
 ### Do not make changes to this file directly
 
 
-type Account {
-  access_token: String
-  createdAt: DateTime!
-  expires_at: Int
-  id_token: String
-  provider: String!
-  providerAccountId: String!
-  refresh_token: String
-  scope: String
-  session_state: String
-  token_type: String
-  type: String!
-  updatedAt: DateTime!
-  user: User!
-  userId: String!
-}
-
-type Authenticator {
-  counter: Int!
-  credentialBackedUp: Boolean!
-  credentialDeviceType: String!
-  credentialID: String!
-  credentialPublicKey: String!
-  providerAccountId: String!
-  transports: String
-  user: User!
-  userId: String!
-}
-
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
 scalar DateTime
 
-type Game {
-  id: String
-  league: String
-  live: Boolean
-  sport: String
-  sportsbooks: [OddsSportsbook]
-  start: String
-  status: String
-  teams: Teams
-  tournament: String
-}
-
 type Mutation {
-  createUser(email: String, name: String): User
   createUserStats: UserStats
   updateUserStats(correctPredictions: Int, currentStreak: Int, longestStreak: Int, points: Int, totalPredictions: Int, userId: String): UserStats
 }
 
-type Odd {
-  grade: String
-  group: String
-  id: String
-  link: String
-  main: Boolean
-  market: String
-  name: String
-  players: [Player]
-  points: Float
-  price: String
-  selection: String
-  sgp: String
-  updated: String
-}
-
-type OddsSportsbook {
-  id: String
-  name: String
-  odds: [Odd]
-}
-
-type Player {
-  id: String
-  name: String
-  position: String
-  team: Team
-}
-
 type Query {
-  games(gameId: String, leagueId: String!, sportsbookId: String!): [Game]
-  self: User
   sportsbooks: [Sportsbook]
   userStatsByUserId(userId: String): UserStats
 }
 
-type Session {
-  createdAt: DateTime!
-  expires: DateTime!
-  sessionToken: String!
-  updatedAt: DateTime!
-  user: User!
-  userId: String!
-}
-
 type Sportsbook {
-  clone: Sportsbook
-  country: String
-  fantasy: Boolean
-  id: String
-  name: String
-  sgp: Boolean
-  state: String
-}
-
-type Team {
-  abbreviation: String
-  id: String
-  name: String
-}
-
-type Teams {
-  away: Team
-  home: Team
-}
-
-type User {
-  Authenticator: [Authenticator!]!
-  UserStats: UserStats
-  accounts: [Account!]!
-  createdAt: DateTime!
-  email: String!
-  emailVerified: DateTime
-  id: ID!
-  image: String
-  name: String
-  sessions: [Session!]!
-  updatedAt: DateTime!
+  affiliate_id: String
+  affiliate_name: String
+  affiliate_url: String
 }
 
 type UserStats {
@@ -143,12 +32,5 @@ type UserStats {
   points: Int!
   totalPredictions: Int!
   updatedAt: DateTime!
-  user: User!
   userId: String!
-}
-
-type VerificationToken {
-  expires: DateTime!
-  identifier: String!
-  token: String!
 }

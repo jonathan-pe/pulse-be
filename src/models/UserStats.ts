@@ -1,6 +1,6 @@
-import { objectType, queryType, mutationType, queryField, mutationField } from 'nexus'
+import { AuthObject } from '@clerk/express'
+import { objectType, queryField, mutationField } from 'nexus'
 import { UserStats } from 'nexus-prisma'
-import { requireAuth } from '../middleware/requireAuth'
 
 // User Type
 export const UserStatsSchema = objectType({
@@ -16,7 +16,6 @@ export const UserStatsSchema = objectType({
     t.field(UserStats.correctPredictions)
     t.field(UserStats.createdAt)
     t.field(UserStats.updatedAt)
-    t.field(UserStats.user)
   },
 })
 
@@ -27,17 +26,9 @@ export const UserStatsByUserIdQuery = queryField('userStatsByUserId', {
     userId: 'String',
   },
   resolve: async (_, { userId }, ctx) => {
-    await requireAuth(ctx)
-
     const { prisma } = ctx
 
-    let stats = await prisma.userStats.findUnique({ where: { userId } })
-
-    if (!stats) {
-      stats = await prisma.userStats.create({ data: { userId } })
-    }
-
-    return stats
+    return await prisma.userStats.findUnique({ where: { userId } })
   },
 })
 
@@ -45,18 +36,18 @@ export const UserStatsByUserIdQuery = queryField('userStatsByUserId', {
 export const CreateUserStats = mutationField('createUserStats', {
   type: 'UserStats',
   resolve: async (_, _args, ctx) => {
-    const user = await requireAuth(ctx)
+    const { prisma, auth } = ctx
 
-    const { prisma } = ctx
+    const userId = (auth as AuthObject).userId
 
-    const stats = await prisma.userStats.findUnique({ where: { userId: user.id } })
+    const stats = await prisma.userStats.findUnique({ where: { userId } })
 
     if (stats) {
       return stats
     }
 
     return await prisma.userStats.create({
-      data: { userId: user.id },
+      data: { userId },
     })
   },
 })

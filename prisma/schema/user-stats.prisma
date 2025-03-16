@@ -1,0 +1,11 @@
+model UserStats {
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  points             Int      @default(0)
+  longestStreak      Int      @default(0)
+  currentStreak      Int      @default(0)
+  totalPredictions   Int      @default(0)
+  correctPredictions Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}

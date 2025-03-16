@@ -43,103 +43,12 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  Account: { // root type
-    access_token?: string | null; // String
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    expires_at?: number | null; // Int
-    id_token?: string | null; // String
-    provider: string; // String!
-    providerAccountId: string; // String!
-    refresh_token?: string | null; // String
-    scope?: string | null; // String
-    session_state?: string | null; // String
-    token_type?: string | null; // String
-    type: string; // String!
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-    userId: string; // String!
-  }
-  Authenticator: { // root type
-    counter: number; // Int!
-    credentialBackedUp: boolean; // Boolean!
-    credentialDeviceType: string; // String!
-    credentialID: string; // String!
-    credentialPublicKey: string; // String!
-    providerAccountId: string; // String!
-    transports?: string | null; // String
-    userId: string; // String!
-  }
-  Game: { // root type
-    id?: string | null; // String
-    league?: string | null; // String
-    live?: boolean | null; // Boolean
-    sport?: string | null; // String
-    sportsbooks?: Array<NexusGenRootTypes['OddsSportsbook'] | null> | null; // [OddsSportsbook]
-    start?: string | null; // String
-    status?: string | null; // String
-    teams?: NexusGenRootTypes['Teams'] | null; // Teams
-    tournament?: string | null; // String
-  }
   Mutation: {};
-  Odd: { // root type
-    grade?: string | null; // String
-    group?: string | null; // String
-    id?: string | null; // String
-    link?: string | null; // String
-    main?: boolean | null; // Boolean
-    market?: string | null; // String
-    name?: string | null; // String
-    players?: Array<NexusGenRootTypes['Player'] | null> | null; // [Player]
-    points?: number | null; // Float
-    price?: string | null; // String
-    selection?: string | null; // String
-    sgp?: string | null; // String
-    updated?: string | null; // String
-  }
-  OddsSportsbook: { // root type
-    id?: string | null; // String
-    name?: string | null; // String
-    odds?: Array<NexusGenRootTypes['Odd'] | null> | null; // [Odd]
-  }
-  Player: { // root type
-    id?: string | null; // String
-    name?: string | null; // String
-    position?: string | null; // String
-    team?: NexusGenRootTypes['Team'] | null; // Team
-  }
   Query: {};
-  Session: { // root type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    expires: NexusGenScalars['DateTime']; // DateTime!
-    sessionToken: string; // String!
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-    userId: string; // String!
-  }
   Sportsbook: { // root type
-    clone?: NexusGenRootTypes['Sportsbook'] | null; // Sportsbook
-    country?: string | null; // String
-    fantasy?: boolean | null; // Boolean
-    id?: string | null; // String
-    name?: string | null; // String
-    sgp?: boolean | null; // Boolean
-    state?: string | null; // String
-  }
-  Team: { // root type
-    abbreviation?: string | null; // String
-    id?: string | null; // String
-    name?: string | null; // String
-  }
-  Teams: { // root type
-    away?: NexusGenRootTypes['Team'] | null; // Team
-    home?: NexusGenRootTypes['Team'] | null; // Team
-  }
-  User: { // root type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    email: string; // String!
-    emailVerified?: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string; // ID!
-    image?: string | null; // String
-    name?: string | null; // String
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    affiliate_id?: string | null; // String
+    affiliate_name?: string | null; // String
+    affiliate_url?: string | null; // String
   }
   UserStats: { // root type
     correctPredictions: number; // Int!
@@ -151,11 +60,6 @@ export interface NexusGenObjects {
     totalPredictions: number; // Int!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
-  }
-  VerificationToken: { // root type
-    expires: NexusGenScalars['DateTime']; // DateTime!
-    identifier: string; // String!
-    token: string; // String!
   }
 }
 
@@ -170,119 +74,18 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
-  Account: { // field return type
-    access_token: string | null; // String
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    expires_at: number | null; // Int
-    id_token: string | null; // String
-    provider: string; // String!
-    providerAccountId: string; // String!
-    refresh_token: string | null; // String
-    scope: string | null; // String
-    session_state: string | null; // String
-    token_type: string | null; // String
-    type: string; // String!
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-    user: NexusGenRootTypes['User']; // User!
-    userId: string; // String!
-  }
-  Authenticator: { // field return type
-    counter: number; // Int!
-    credentialBackedUp: boolean; // Boolean!
-    credentialDeviceType: string; // String!
-    credentialID: string; // String!
-    credentialPublicKey: string; // String!
-    providerAccountId: string; // String!
-    transports: string | null; // String
-    user: NexusGenRootTypes['User']; // User!
-    userId: string; // String!
-  }
-  Game: { // field return type
-    id: string | null; // String
-    league: string | null; // String
-    live: boolean | null; // Boolean
-    sport: string | null; // String
-    sportsbooks: Array<NexusGenRootTypes['OddsSportsbook'] | null> | null; // [OddsSportsbook]
-    start: string | null; // String
-    status: string | null; // String
-    teams: NexusGenRootTypes['Teams'] | null; // Teams
-    tournament: string | null; // String
-  }
   Mutation: { // field return type
-    createUser: NexusGenRootTypes['User'] | null; // User
     createUserStats: NexusGenRootTypes['UserStats'] | null; // UserStats
     updateUserStats: NexusGenRootTypes['UserStats'] | null; // UserStats
   }
-  Odd: { // field return type
-    grade: string | null; // String
-    group: string | null; // String
-    id: string | null; // String
-    link: string | null; // String
-    main: boolean | null; // Boolean
-    market: string | null; // String
-    name: string | null; // String
-    players: Array<NexusGenRootTypes['Player'] | null> | null; // [Player]
-    points: number | null; // Float
-    price: string | null; // String
-    selection: string | null; // String
-    sgp: string | null; // String
-    updated: string | null; // String
-  }
-  OddsSportsbook: { // field return type
-    id: string | null; // String
-    name: string | null; // String
-    odds: Array<NexusGenRootTypes['Odd'] | null> | null; // [Odd]
-  }
-  Player: { // field return type
-    id: string | null; // String
-    name: string | null; // String
-    position: string | null; // String
-    team: NexusGenRootTypes['Team'] | null; // Team
-  }
   Query: { // field return type
-    games: Array<NexusGenRootTypes['Game'] | null> | null; // [Game]
-    self: NexusGenRootTypes['User'] | null; // User
     sportsbooks: Array<NexusGenRootTypes['Sportsbook'] | null> | null; // [Sportsbook]
     userStatsByUserId: NexusGenRootTypes['UserStats'] | null; // UserStats
   }
-  Session: { // field return type
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    expires: NexusGenScalars['DateTime']; // DateTime!
-    sessionToken: string; // String!
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
-    user: NexusGenRootTypes['User']; // User!
-    userId: string; // String!
-  }
   Sportsbook: { // field return type
-    clone: NexusGenRootTypes['Sportsbook'] | null; // Sportsbook
-    country: string | null; // String
-    fantasy: boolean | null; // Boolean
-    id: string | null; // String
-    name: string | null; // String
-    sgp: boolean | null; // Boolean
-    state: string | null; // String
-  }
-  Team: { // field return type
-    abbreviation: string | null; // String
-    id: string | null; // String
-    name: string | null; // String
-  }
-  Teams: { // field return type
-    away: NexusGenRootTypes['Team'] | null; // Team
-    home: NexusGenRootTypes['Team'] | null; // Team
-  }
-  User: { // field return type
-    Authenticator: NexusGenRootTypes['Authenticator'][]; // [Authenticator!]!
-    UserStats: NexusGenRootTypes['UserStats'] | null; // UserStats
-    accounts: NexusGenRootTypes['Account'][]; // [Account!]!
-    createdAt: NexusGenScalars['DateTime']; // DateTime!
-    email: string; // String!
-    emailVerified: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string; // ID!
-    image: string | null; // String
-    name: string | null; // String
-    sessions: NexusGenRootTypes['Session'][]; // [Session!]!
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    affiliate_id: string | null; // String
+    affiliate_name: string | null; // String
+    affiliate_url: string | null; // String
   }
   UserStats: { // field return type
     correctPredictions: number; // Int!
@@ -293,130 +96,23 @@ export interface NexusGenFieldTypes {
     points: number; // Int!
     totalPredictions: number; // Int!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
-    user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
-  }
-  VerificationToken: { // field return type
-    expires: NexusGenScalars['DateTime']; // DateTime!
-    identifier: string; // String!
-    token: string; // String!
   }
 }
 
 export interface NexusGenFieldTypeNames {
-  Account: { // field return type name
-    access_token: 'String'
-    createdAt: 'DateTime'
-    expires_at: 'Int'
-    id_token: 'String'
-    provider: 'String'
-    providerAccountId: 'String'
-    refresh_token: 'String'
-    scope: 'String'
-    session_state: 'String'
-    token_type: 'String'
-    type: 'String'
-    updatedAt: 'DateTime'
-    user: 'User'
-    userId: 'String'
-  }
-  Authenticator: { // field return type name
-    counter: 'Int'
-    credentialBackedUp: 'Boolean'
-    credentialDeviceType: 'String'
-    credentialID: 'String'
-    credentialPublicKey: 'String'
-    providerAccountId: 'String'
-    transports: 'String'
-    user: 'User'
-    userId: 'String'
-  }
-  Game: { // field return type name
-    id: 'String'
-    league: 'String'
-    live: 'Boolean'
-    sport: 'String'
-    sportsbooks: 'OddsSportsbook'
-    start: 'String'
-    status: 'String'
-    teams: 'Teams'
-    tournament: 'String'
-  }
   Mutation: { // field return type name
-    createUser: 'User'
     createUserStats: 'UserStats'
     updateUserStats: 'UserStats'
   }
-  Odd: { // field return type name
-    grade: 'String'
-    group: 'String'
-    id: 'String'
-    link: 'String'
-    main: 'Boolean'
-    market: 'String'
-    name: 'String'
-    players: 'Player'
-    points: 'Float'
-    price: 'String'
-    selection: 'String'
-    sgp: 'String'
-    updated: 'String'
-  }
-  OddsSportsbook: { // field return type name
-    id: 'String'
-    name: 'String'
-    odds: 'Odd'
-  }
-  Player: { // field return type name
-    id: 'String'
-    name: 'String'
-    position: 'String'
-    team: 'Team'
-  }
   Query: { // field return type name
-    games: 'Game'
-    self: 'User'
     sportsbooks: 'Sportsbook'
     userStatsByUserId: 'UserStats'
   }
-  Session: { // field return type name
-    createdAt: 'DateTime'
-    expires: 'DateTime'
-    sessionToken: 'String'
-    updatedAt: 'DateTime'
-    user: 'User'
-    userId: 'String'
-  }
   Sportsbook: { // field return type name
-    clone: 'Sportsbook'
-    country: 'String'
-    fantasy: 'Boolean'
-    id: 'String'
-    name: 'String'
-    sgp: 'Boolean'
-    state: 'String'
-  }
-  Team: { // field return type name
-    abbreviation: 'String'
-    id: 'String'
-    name: 'String'
-  }
-  Teams: { // field return type name
-    away: 'Team'
-    home: 'Team'
-  }
-  User: { // field return type name
-    Authenticator: 'Authenticator'
-    UserStats: 'UserStats'
-    accounts: 'Account'
-    createdAt: 'DateTime'
-    email: 'String'
-    emailVerified: 'DateTime'
-    id: 'ID'
-    image: 'String'
-    name: 'String'
-    sessions: 'Session'
-    updatedAt: 'DateTime'
+    affiliate_id: 'String'
+    affiliate_name: 'String'
+    affiliate_url: 'String'
   }
   UserStats: { // field return type name
     correctPredictions: 'Int'
@@ -427,22 +123,12 @@ export interface NexusGenFieldTypeNames {
     points: 'Int'
     totalPredictions: 'Int'
     updatedAt: 'DateTime'
-    user: 'User'
     userId: 'String'
-  }
-  VerificationToken: { // field return type name
-    expires: 'DateTime'
-    identifier: 'String'
-    token: 'String'
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
-    createUser: { // args
-      email?: string | null; // String
-      name?: string | null; // String
-    }
     updateUserStats: { // args
       correctPredictions?: number | null; // Int
       currentStreak?: number | null; // Int
@@ -453,11 +139,6 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
-    games: { // args
-      gameId?: string | null; // String
-      leagueId: string; // String!
-      sportsbookId: string; // String!
-    }
     userStatsByUserId: { // args
       userId?: string | null; // String
     }
