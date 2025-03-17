@@ -43,6 +43,11 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  League: { // root type
+    id?: string | null; // String
+    name?: string | null; // String
+    sport?: string | null; // String
+  }
   Mutation: {};
   Query: {};
   Sportsbook: { // root type
@@ -74,11 +79,17 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  League: { // field return type
+    id: string | null; // String
+    name: string | null; // String
+    sport: string | null; // String
+  }
   Mutation: { // field return type
     createUserStats: NexusGenRootTypes['UserStats'] | null; // UserStats
     updateUserStats: NexusGenRootTypes['UserStats'] | null; // UserStats
   }
   Query: { // field return type
+    leagues: Array<NexusGenRootTypes['League'] | null> | null; // [League]
     sportsbooks: Array<NexusGenRootTypes['Sportsbook'] | null> | null; // [Sportsbook]
     userStatsByUserId: NexusGenRootTypes['UserStats'] | null; // UserStats
   }
@@ -101,11 +112,17 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  League: { // field return type name
+    id: 'String'
+    name: 'String'
+    sport: 'String'
+  }
   Mutation: { // field return type name
     createUserStats: 'UserStats'
     updateUserStats: 'UserStats'
   }
   Query: { // field return type name
+    leagues: 'League'
     sportsbooks: 'Sportsbook'
     userStatsByUserId: 'UserStats'
   }

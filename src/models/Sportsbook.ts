@@ -15,6 +15,6 @@ export const SportsbookSchema = objectType({
 export const SportsbooksQuery = queryField('sportsbooks', {
   type: list('Sportsbook'),
   resolve: async (_root, _args, _ctx) => {
-    return getSportsbooks()
+    return await getSportsbooks()
   },
 })

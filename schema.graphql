@@ -7,12 +7,19 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
+type League {
+  id: String
+  name: String
+  sport: String
+}
+
 type Mutation {
   createUserStats: UserStats
   updateUserStats(correctPredictions: Int, currentStreak: Int, longestStreak: Int, points: Int, totalPredictions: Int, userId: String): UserStats
 }
 
 type Query {
+  leagues: [League]
   sportsbooks: [Sportsbook]
   userStatsByUserId(userId: String): UserStats
 }
