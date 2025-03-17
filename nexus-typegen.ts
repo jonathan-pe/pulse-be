@@ -46,9 +46,9 @@ export interface NexusGenObjects {
   Mutation: {};
   Query: {};
   Sportsbook: { // root type
-    affiliate_id?: string | null; // String
-    affiliate_name?: string | null; // String
-    affiliate_url?: string | null; // String
+    id?: string | null; // String
+    name?: string | null; // String
+    url?: string | null; // String
   }
   UserStats: { // root type
     correctPredictions: number; // Int!
@@ -83,9 +83,9 @@ export interface NexusGenFieldTypes {
     userStatsByUserId: NexusGenRootTypes['UserStats'] | null; // UserStats
   }
   Sportsbook: { // field return type
-    affiliate_id: string | null; // String
-    affiliate_name: string | null; // String
-    affiliate_url: string | null; // String
+    id: string | null; // String
+    name: string | null; // String
+    url: string | null; // String
   }
   UserStats: { // field return type
     correctPredictions: number; // Int!
@@ -110,9 +110,9 @@ export interface NexusGenFieldTypeNames {
     userStatsByUserId: 'UserStats'
   }
   Sportsbook: { // field return type name
-    affiliate_id: 'String'
-    affiliate_name: 'String'
-    affiliate_url: 'String'
+    id: 'String'
+    name: 'String'
+    url: 'String'
   }
   UserStats: { // field return type name
     correctPredictions: 'Int'

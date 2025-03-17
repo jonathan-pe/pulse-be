@@ -5,9 +5,9 @@ import { getSportsbooks } from '../utils/rundownApi'
 export const SportsbookSchema = objectType({
   name: 'Sportsbook',
   definition(t) {
-    t.string('affiliate_id')
-    t.string('affiliate_name')
-    t.string('affiliate_url')
+    t.string('id')
+    t.string('name')
+    t.string('url')
   },
 })
 

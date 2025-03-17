@@ -18,9 +18,9 @@ type Query {
 }
 
 type Sportsbook {
-  affiliate_id: String
-  affiliate_name: String
-  affiliate_url: String
+  id: String
+  name: String
+  url: String
 }
 
 type UserStats {
