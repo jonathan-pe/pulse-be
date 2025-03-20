@@ -23,12 +23,12 @@ export const UserStatsSchema = objectType({
 export const UserStatsByUserIdQuery = queryField('userStatsByUserId', {
   type: 'UserStats',
   args: {
-    userId: 'String',
+    id: 'String',
   },
-  resolve: async (_, { userId }, ctx) => {
+  resolve: async (_, { id }, ctx) => {
     const { prisma } = ctx
 
-    return await prisma.userStats.findUnique({ where: { userId } })
+    return await prisma.userStats.findUnique({ where: { userId: id } })
   },
 })
 

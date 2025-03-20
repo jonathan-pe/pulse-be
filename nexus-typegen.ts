@@ -157,7 +157,7 @@ export interface NexusGenArgTypes {
   }
   Query: {
     userStatsByUserId: { // args
-      userId?: string | null; // String
+      id?: string | null; // String
     }
   }
 }

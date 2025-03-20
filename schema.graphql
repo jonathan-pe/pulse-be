@@ -21,7 +21,7 @@ type Mutation {
 type Query {
   leagues: [League]
   sportsbooks: [Sportsbook]
-  userStatsByUserId(userId: String): UserStats
+  userStatsByUserId(id: String): UserStats
 }
 
 type Sportsbook {
