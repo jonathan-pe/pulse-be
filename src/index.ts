@@ -60,6 +60,11 @@ const yoga = createYoga({
 
 app.use(yoga.graphqlEndpoint, yoga)
 
+// Health check
+app.use('/healthcheck', (_req: Request, res: Response) => {
+  res.status(200).json({ status: 'ok' })
+})
+
 app.use('/', (_req: Request, res: Response) => {
   res.status(200).json({ status: 'ok' })
 })
