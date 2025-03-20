@@ -1,20 +1,30 @@
-import { list, objectType, queryField } from 'nexus'
 import { getSportsbooks } from '../utils/rundownApi'
+import { builder } from '../pothosBuilder'
+
+export interface Sportsbook {
+  id: number
+  name: string
+  url: string
+}
 
 // Type
-export const SportsbookSchema = objectType({
-  name: 'Sportsbook',
-  definition(t) {
-    t.string('id')
-    t.string('name')
-    t.string('url')
-  },
+const SportsbookRef = builder.objectRef<Sportsbook>('Sportsbook')
+
+SportsbookRef.implement({
+  description: 'A Rundown API sportsbook',
+  fields: (t) => ({
+    id: t.exposeID('id'),
+    name: t.exposeString('name'),
+    url: t.exposeString('url'),
+  }),
 })
 
 // Queries
-export const SportsbooksQuery = queryField('sportsbooks', {
-  type: list('Sportsbook'),
-  resolve: async (_root, _args, _ctx) => {
-    return await getSportsbooks()
-  },
-})
+builder.queryField('sportsbooks', (t) =>
+  t.field({
+    type: [SportsbookRef],
+    resolve: async () => {
+      return await getSportsbooks()
+    },
+  })
+)

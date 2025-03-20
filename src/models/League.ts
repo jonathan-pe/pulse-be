@@ -1,20 +1,30 @@
-import { list, objectType, queryField } from 'nexus'
 import { getLeagues } from '../utils/rundownApi'
+import { builder } from '../pothosBuilder'
+
+export interface League {
+  id: number
+  name: string
+  sport: string
+}
 
 // Type
-export const LeagueSchema = objectType({
-  name: 'League',
-  definition(t) {
-    t.string('id')
-    t.string('name')
-    t.string('sport')
-  },
+const LeagueRef = builder.objectRef<League>('League')
+
+LeagueRef.implement({
+  description: 'A Rundown API league',
+  fields: (t) => ({
+    id: t.exposeID('id'),
+    name: t.exposeString('name'),
+    sport: t.exposeString('sport'),
+  }),
 })
 
 // Queries
-export const LeaguesQuery = queryField('leagues', {
-  type: list('League'),
-  resolve: async (_root, _args, _ctx) => {
-    return await getLeagues()
-  },
-})
+builder.queryField('leagues', (t) =>
+  t.field({
+    type: [LeagueRef],
+    resolve: async () => {
+      return await getLeagues()
+    },
+  })
+)

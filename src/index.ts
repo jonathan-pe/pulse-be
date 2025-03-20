@@ -1,6 +1,6 @@
 import { createYoga, YogaInitialContext } from 'graphql-yoga'
 import { schema } from './schema'
-import { context } from './context'
+import { context } from './db'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import { clerkMiddleware } from '@clerk/express'

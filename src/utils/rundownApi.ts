@@ -1,5 +1,5 @@
-import { League } from '../types/league'
-import { Sportsbook } from '../types/sportsbook'
+import { Sportsbook } from '../models/Sportsbook'
+import { League } from '../models/League'
 
 const RUNDOWN_API_URL = 'https://therundown-therundown-v1.p.rapidapi.com'
 const RUNDOWN_API_KEY = process.env.RUNDOWN_API_KEY!

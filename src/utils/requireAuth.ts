@@ -1,7 +1,7 @@
 import { getAuth } from '@clerk/express'
 import { Request } from 'express'
 import { GraphQLError } from 'graphql'
-import { prisma } from '../context'
+import { prisma } from '../db'
 
 const requireAuth = async (req: Request) => {
   const auth = getAuth(req)

@@ -3,8 +3,8 @@ generator client {
   previewFeatures = ["prismaSchemaFolder"]
 }
 
-generator nexusPrisma {
-  provider = "nexus-prisma"
+generator pothos {
+  provider = "prisma-pothos-types"
 }
 
 datasource db {
