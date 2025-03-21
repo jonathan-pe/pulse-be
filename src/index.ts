@@ -20,7 +20,7 @@ const PROD_ALLOWED_ORIGINS = ['https://playpulse.co']
 
 const app = express()
 
-// Adds `auth` to the context
+// Adds `auth` to the Express request
 app.use(
   clerkMiddleware({
     authorizedParties: process.env.NODE_ENV === 'development' ? DEV_ALLOWED_ORIGINS : PROD_ALLOWED_ORIGINS,
@@ -38,15 +38,6 @@ app.use(
 
 const yoga = createYoga({
   schema,
-  context: (request) => {
-    const req = (request as YogaInitialContext & { req: Request }).req
-
-    /* Currently covers all resolvers, maybe need to abstract out if we want some public endpoints
-    but I'm currently not seeing any use cases where we should open up these endpoints to the public */
-    requireAuth(req)
-
-    return context
-  },
   logging: process.env.NODE_ENV === 'development' ? 'debug' : 'info',
   plugins: [
     useCookies(),
@@ -58,15 +49,20 @@ const yoga = createYoga({
   ],
 })
 
-app.use(yoga.graphqlEndpoint, yoga)
+app.use(yoga.graphqlEndpoint, requireAuth, yoga)
 
 // Health check
 app.use('/healthcheck', (_req: Request, res: Response) => {
   res.status(200).json({ status: 'ok' })
 })
 
-app.use('/', (_req: Request, res: Response) => {
+app.get('/', (_req: Request, res: Response) => {
   res.status(200).json({ status: 'ok' })
+})
+
+// 404 handler
+app.use((_req: Request, res: Response) => {
+  res.status(404).json({ error: 'Not found' })
 })
 
 //error handler

@@ -1,20 +1,19 @@
 import { getAuth } from '@clerk/express'
-import { Request } from 'express'
-import { GraphQLError } from 'graphql'
+import { NextFunction, Request, Response } from 'express'
 import { prisma } from '../db'
 
-const requireAuth = async (req: Request) => {
+const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
   const auth = getAuth(req)
 
+  if (process.env.NODE_ENV === 'development') {
+    console.log('auth', auth)
+    next()
+    return
+  }
+
   if (!auth || !auth.userId) {
-    throw new GraphQLError('Unauthorized', {
-      extensions: {
-        code: 'Unauthorized',
-        http: {
-          status: 401,
-        },
-      },
-    })
+    res.status(401).json({ error: 'Unauthorized' })
+    return
   }
 
   // TODO: Eventually we'll want to hook up to Webhooks to create userStats
@@ -25,6 +24,8 @@ const requireAuth = async (req: Request) => {
       data: { userId: auth.userId },
     })
   }
+
+  next()
 }
 
 export default requireAuth

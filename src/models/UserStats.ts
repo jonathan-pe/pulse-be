@@ -1,4 +1,4 @@
-import { builder } from '../pothosBuilder'
+import { builder } from '../pothos'
 import { prisma } from '../db'
 
 export interface UserStats {

@@ -1,5 +1,5 @@
 import { getLeagues } from '../utils/rundownApi'
-import { builder } from '../pothosBuilder'
+import { builder } from '../pothos'
 
 export interface League {
   id: number

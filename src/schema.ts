@@ -1,4 +1,4 @@
-import { builder } from './pothosBuilder'
+import { builder } from './pothos'
 
 import './models'
 

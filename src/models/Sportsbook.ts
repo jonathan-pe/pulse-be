@@ -1,5 +1,5 @@
 import { getSportsbooks } from '../utils/rundownApi'
-import { builder } from '../pothosBuilder'
+import { builder } from '../pothos'
 
 export interface Sportsbook {
   id: number
