@@ -1,6 +1,5 @@
-import { createYoga, YogaInitialContext } from 'graphql-yoga'
+import { createYoga } from 'graphql-yoga'
 import { schema } from './schema'
-import { context } from './db'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import { clerkMiddleware } from '@clerk/express'
@@ -74,8 +73,8 @@ const PORT = process.env.PORT || 4000
 
 app.listen(PORT, () => {
   console.info(
-    `Server is running on ${process.env.NODE_ENV === 'development' ? 'http://localhost:' : 'https://api.playpulse.co'}${
-      process.env.PORT || 4000
-    }/graphql`
+    `Server is running on ${
+      process.env.NODE_ENV === 'development' ? 'http://localhost:' : 'https://api.playpulse.co:'
+    }${process.env.PORT || 4000}/graphql`
   )
 })
